@@ -1,0 +1,18 @@
+<table>
+    <thead>
+        <tr>
+            <th>Sr No</th>
+            <th>Post</th>
+            <th>Author</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in PostData %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ data.content }}</td>
+            <td>{{ data.user.username }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
