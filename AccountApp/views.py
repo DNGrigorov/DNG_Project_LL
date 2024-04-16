@@ -8,6 +8,8 @@ def UserSignUpView(request):
         if form.is_valid():
             form.save()
             return redirect('AccountApp:ViewLogin')
+        else:
+            print(form.errors)
     else:
         form = SignUpForm()
     return render(request, 'AccountApp/signup.html', {'form':form})
