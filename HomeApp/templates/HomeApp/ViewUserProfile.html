@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1>{{ profile.username }}</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <p><strong>Birthdate:</strong> {{ profile.birth_year }}/{{ profile.birth_month }}/{{ profile.birth_day }}
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Gender:</strong> {{ profile.gender }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p><strong>Full Name:</strong> {{ profile.first_name }} {{ profile.last_name }}</p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Email:</strong> {{ profile.email }}</p>
+        </div>
+    </div>
+
+
+    <h2 class="mt-4">Ratings</h2>
+    <div class="row">
+        {% if profile.ratings_received.all %}
+        {% for rating in profile.ratings_received.all %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ rating.language }}</h5>
+                    <p class="card-text">Stars: {{ rating.stars }}</p>
+                    <p class="card-text">Rated by: {{ rating.rater.username }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="col">
+            <div class="alert alert-info" role="alert">
+                This user hasn't been rated yet.
+            </div>
+            <a href="{% url 'HomeApp:ViewRateUser' profile.id %}" class="btn btn-primary">Rate {{profile.username}}</a>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+
+</div>
+{% endblock %}

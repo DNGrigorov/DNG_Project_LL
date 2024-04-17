@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Original Post Content</h1>
+            <p class="card-text">{{ original_version.content|safe }}</p>
+            <hr>
+            <h2 class="card-title">Post Owner</h2>
+            <p class="card-text">{{ post.user.username }}</p>
+            <hr>
+            <h2 class="card-title">Changes:</h2>
+            {% if versions %}
+            {% for version in versions %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Changes by: {{ version.user.username }}</h5>
+                    <p class="card-text">{{ version.content|safe }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>No changes yet.</p>
+            {% endif %}
+            <!-- Go Back Button -->
+            <a href="{% url 'HomeApp:ViewPostDetail' post.id %}" class="btn btn-secondary">Go Back</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

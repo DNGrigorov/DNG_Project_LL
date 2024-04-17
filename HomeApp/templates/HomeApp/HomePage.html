@@ -1,1 +1,19 @@
-<h2>Learn Language</h2>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="container">
+    <div class="row mt-5 align-items-center">
+        <div class="col-md-6">
+            <h2>Welcome to Learn Language</h2>
+            <p class="lead">Learn Language is a platform dedicated to helping you master new languages.</p>
+            <p>Whether you're a beginner or an advanced learner, our comprehensive resources and interactive tools will
+                guide you through your language learning journey.</p>
+            <p>Start exploring now and unlock your potential to speak, read, and write in a new language!</p>
+        </div>
+        <div class="col-md-6">
+            <img src="{% static 'assets/images/language.jpeg' %}" class="img-fluid rounded" alt="Language Image">
+        </div>
+    </div>
+</main>
+{% endblock content %}

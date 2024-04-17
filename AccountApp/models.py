@@ -13,3 +13,15 @@ class WebUser(AbstractUser):
 
     def __str__(self):
         return self.email
+
+class LanguageSkill(models.Model):
+    user = models.OneToOneField(WebUser, on_delete=models.CASCADE)
+    english_skill = models.DecimalField(max_digits=3, decimal_places=1, default=0)
+    german_skill = models.DecimalField(max_digits=3, decimal_places=1, default=0)
+    japanese_skill = models.DecimalField(max_digits=3, decimal_places=1, default=0)
+
+class Rating(models.Model):
+    rater = models.ForeignKey(WebUser, related_name='ratings_given', on_delete=models.CASCADE)
+    rated_user = models.ForeignKey(WebUser, related_name='ratings_received', on_delete=models.CASCADE)
+    language = models.CharField(max_length=20)
+    stars = models.DecimalField(max_digits=3, decimal_places=1)

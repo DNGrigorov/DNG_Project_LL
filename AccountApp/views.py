@@ -1,15 +1,19 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, UserLoginForm
+from django.contrib import messages
 
 def UserSignUpView(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'You have successfully signed up! You can now log in.')
             return redirect('AccountApp:ViewLogin')
         else:
-            print(form.errors)
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field.capitalize()}: {error}")
     else:
         form = SignUpForm()
     return render(request, 'AccountApp/signup.html', {'form':form})
@@ -32,3 +36,7 @@ def UserLoginView(request):
         form = UserLoginForm()
 
     return render(request, 'AccountApp/login.html', {'form': form})
+
+def UserLogoutView(request):
+    logout(request)
+    return redirect('AccountApp:ViewLogin')

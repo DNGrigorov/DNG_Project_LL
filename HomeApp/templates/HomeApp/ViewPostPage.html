@@ -1,18 +1,24 @@
-<table>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<table class="container table">
     <thead>
         <tr>
-            <th>Sr No</th>
-            <th>Post</th>
-            <th>Author</th>
+            <th scope="col">Sr No</th>
+            <th scope="col">Post</th>
+            <th scope="col">Author</th>
+            <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
         {% for data in PostData %}
         <tr>
             <td>{{ forloop.counter }}</td>
-            <td>{{ data.content }}</td>
+            <td><a href="{% url 'HomeApp:ViewPostDetail' data.id %}">{{ data.content|safe }}</a></td>
             <td>{{ data.user.username }}</td>
+            <td><a href="{% url 'HomeApp:ViewEditPost' data.id %}">Edit</a> <a href="{% url 'HomeApp:ViewRateUser' data.user.id %}"> Rate Author</a> <a href="{% url 'HomeApp:ViewProfile' data.user.id %}"> View Profile</a></td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+{% endblock content %}

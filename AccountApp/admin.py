@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import WebUser
+from .models import WebUser, LanguageSkill, Rating
 
 admin.site.register(WebUser)
-
-# Register your models here.
+admin.site.register(LanguageSkill)
+admin.site.register(Rating)
