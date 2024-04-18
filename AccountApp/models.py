@@ -25,3 +25,6 @@ class Rating(models.Model):
     rated_user = models.ForeignKey(WebUser, related_name='ratings_received', on_delete=models.CASCADE)
     language = models.CharField(max_length=20)
     stars = models.DecimalField(max_digits=3, decimal_places=1)
+
+    def __str__(self):
+        return self.rater.username

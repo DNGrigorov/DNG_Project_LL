@@ -13,4 +13,8 @@ urlpatterns = [
     path('view_changes/<int:post_id>/', views.ViewChangesVersion, name="ViewChangesVersion"),
     path('rate_user/<int:user_id>/', views.ViewRateUser, name="ViewRateUser"),
     path('view_profile/<int:user_id>/', views.ViewUserProfile, name="ViewProfile"),
+    path('delete_post/<int:post_id>', views.ViewDeletePost, name="ViewDeletePost")
+
+
+
 ]

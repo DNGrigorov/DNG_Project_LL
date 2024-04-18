@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-body">
             <h1 class="card-title">{{ post }}</h1>
-            <p class="card-text">{{ post.content|safe }}</p>
+            <p class="card-text">{{ original_version.content|safe }}</p>
             <!-- Edit option -->
             <div class="d-flex justify-content-center mb-3"> <!-- Centering the button -->
                 {% if user.is_authenticated %}

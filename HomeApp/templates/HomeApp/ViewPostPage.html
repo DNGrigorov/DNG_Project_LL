@@ -16,7 +16,20 @@
             <td>{{ forloop.counter }}</td>
             <td><a href="{% url 'HomeApp:ViewPostDetail' data.id %}">{{ data.content|safe }}</a></td>
             <td>{{ data.user.username }}</td>
-            <td><a href="{% url 'HomeApp:ViewEditPost' data.id %}">Edit</a> <a href="{% url 'HomeApp:ViewRateUser' data.user.id %}"> Rate Author</a> <a href="{% url 'HomeApp:ViewProfile' data.user.id %}"> View Profile</a></td>
+            <td>
+                {% if request.user.is_superuser %}
+                <!-- Admin-specific actions -->
+                <a href="{% url 'HomeApp:ViewEditPost' data.id %}">Edit</a>
+                <a href="{% url 'HomeApp:ViewRateUser' data.user.id %}">Rate Author</a>
+                <a href="{% url 'HomeApp:ViewProfile' data.user.id %}">View Profile</a>
+                <a href="{% url 'HomeApp:ViewDeletePost' data.id %}">Delete Post</a>
+            {% else %}
+                <!-- Non-admin actions -->
+                <a href="{% url 'HomeApp:ViewEditPost' data.id %}">Edit</a>
+                <a href="{% url 'HomeApp:ViewRateUser' data.user.id %}">Rate Author</a>
+                <a href="{% url 'HomeApp:ViewProfile' data.user.id %}">View Profile</a>
+            {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </tbody>

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h2>User Search</h2>
+    <form action="{% url 'AccountApp:api_user_search' %}" method="get">
+        <div class="mb-3">
+            <label for="language_skill" class="form-label">Language Skill:</label>
+            <select name="language_skill" id="language_skill" class="form-select">
+                <option value="English">English</option>
+                <option value="German">German</option>
+                <option value="Japanese">Japanese</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="min_rating" class="form-label">Minimum Rating:</label>
+            <input type="number" name="min_rating" id="min_rating" min="1" max="5" step="0.1" value="4" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <h2>Search Results</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <!-- Add more table headers as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <!-- Add more table cells as needed -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
